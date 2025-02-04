@@ -35,8 +35,10 @@ const validateToken = async () => {
     }
     try {
         const result = await jose.jwtVerify(token.value, new TextEncoder().encode(process.env.TOKEN_SECRET))
+        console.log(result.payload)
         return true
-    } catch (error) {
+    } catch (err) {
+        cookieStore.delete('token')
         return false
     }
 }

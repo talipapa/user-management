@@ -1,7 +1,25 @@
+'use client'
+
+import { getUser } from '@/lib/session'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const NavigationBar = () => {
+    const [user, setUser] = React.useState()
+    const [Loading, setLoading] = React.useState(true)
+
+    useEffect(() => {
+        getUser()
+            .then((res) => {
+                setUser(res)
+                setLoading(false)
+            })
+    }, [])
+
+    if (user === undefined) {
+        return <div>Loading...</div>
+    }
+
   return (
     <div className="navbar bg-base-100">
         <div className="flex-1">

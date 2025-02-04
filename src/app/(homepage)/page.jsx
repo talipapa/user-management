@@ -8,7 +8,6 @@ export default function Home() {
   const [users, setUsers] = useState([])
 
 
-
   useEffect(() => {
     fetchUsers()
       .then((res) => {
@@ -20,7 +19,6 @@ export default function Home() {
       .catch((err) => {
         console.error(err)
       })
-
   }, [])
   return (
     <div className="w-full lg:w-[70%] bg-slate-50 lg:shadow-xl lg:rounded-3xl px-8 py-6">

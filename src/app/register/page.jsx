@@ -5,7 +5,6 @@ import { registerUser } from './_action'
 import Table from '../components/Table'
 import TextInput from '../components/TextInput'
 import { createToken } from '@/lib/webToken'
-
 const page = () => {
 
     const [error, setError] = React.useState()
@@ -16,8 +15,6 @@ const page = () => {
         registerUser(e.target.first_name.value, e.target.last_name.value, e.target.email.value, e.target.password.value, e.target.confirm_password.value)
             .then((res) => {
                 if (res.code === 200) {
-                    // Redirect user to dashboard
-
                     setError()
                 } else{
                     setError(res.result)
