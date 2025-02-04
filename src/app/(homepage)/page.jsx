@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     fetchUsers()
       .then((res) => {
-        if (res === 404){
+        if (res.length <= 0){
           console.warn("No users found")
         }
         setUsers(res)
@@ -23,8 +23,8 @@ export default function Home() {
 
   }, [])
   return (
-    <div>
-      <Table/>
+    <div className="w-full lg:w-[70%] bg-slate-50 lg:shadow-xl lg:rounded-3xl px-8 py-6">
+      <Table users={users}/>
     </div>
   );
 }

@@ -35,7 +35,9 @@ class User {
     async find() {
         try {
             await dbConnect();
-            return await this.Model.find().select(['first_name', 'last_name']).exec();
+            const response = await this.Model.find().select(['first_name', 'last_name', 'email']);
+            return JSON.parse(JSON.stringify(response))
+            
         } catch (err) {
             console.error(err.errorResponse)
             return err.errorResponse
@@ -46,7 +48,7 @@ class User {
         try {
             await dbConnect();
             const response = await this.Model.findById(id);
-            return response
+            return JSON.parse(JSON.stringify(response))
         } catch (err) {
             console.error(err.errorResponse)
             return err.errorResponse
@@ -57,7 +59,7 @@ class User {
         try {
             await dbConnect();       
             const response = await this.Model.create(userData)
-            return response;
+            return JSON.parse(JSON.stringify(response))
         } catch (err) {
             console.error(err.errorResponse)
             return err.errorResponse
@@ -68,7 +70,7 @@ class User {
         try {
             await dbConnect();
             const response = this.Model.findByIdAndUpdate(id, userData, { new: true });
-            return response
+            return JSON.parse(JSON.stringify(response))
         } catch (err) {
             console.error(err.errorResponse)
             return err.errorResponse       
@@ -79,7 +81,7 @@ class User {
         try {
             await dbConnect();
             const response = await this.Model.findByIdAndDelete(id);
-            return response
+            return JSON.parse(JSON.stringify(response))
         } catch (err) {
             console.error(err.errorResponse)
             return err.errorResponse            

@@ -1,48 +1,65 @@
 import React from 'react'
 
-const Table = () => {
+const Table = ({users}) => {
   return (
     <div className="overflow-x-auto">
-        <table className="table">
-            {/* head */}
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12">
-                                <img
-                                src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                alt="Avatar Tailwind CSS Component" />
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                            <div className="text-sm opacity-50">United States</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Zemlak, Daniel and Leannon
-                    <br />
-                    <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                </td>
-                <td>Purple</td>
-                <th>
-                    <button className="btn btn-ghost btn-xs">Details</button>
-                </th>
-            </tr>
-
-            </tbody>
-        </table>
+        {users.length > 0 ? (
+            <table className="table">
+                {/* head */}
+                <thead>
+                    <tr>
+                        <th>Profile</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.length > 0 && users.map((user, id) => (
+                            <tr key={id}>
+                                <td>                  
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle h-12 w-12">
+                                                <img
+                                                src={`https://ui-avatars.com/api?background=random&name=${user.first_name}+${user.last_name}`}
+                                                alt="User image" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>                  
+                                    <div className="flex items-center gap-3">        
+                                        <div>
+                                            <div className="font-bold">{user.first_name}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>                  
+                                    <div className="flex items-center gap-3">        
+                                        <div>
+                                            <div className="font-bold">{user.last_name}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className='font-bold'>{user.email}</div>
+                                </td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">Details</button>
+                                </th>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        ) : (
+            <div>
+                No user is found
+            </div>
+        )}
     </div>
   )
 }

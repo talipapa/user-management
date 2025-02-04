@@ -5,7 +5,7 @@ const NavigationBar = () => {
   return (
     <div className="navbar bg-base-100">
         <div className="flex-1">
-            <Link href="/" className="btn btn-ghost text-xl">User manager</Link>
+            <Link href="/" className="btn btn-ghost text-xl">User Manager</Link>
         </div>
         <div className="flex-none">
             <ul className="menu menu-horizontal px-2">
@@ -15,10 +15,10 @@ const NavigationBar = () => {
 
                 <div className='menu menu-horizontal'>
                     <li>
-                        <a>Sign-In</a>
+                        <Link href="/login">Sign-In</Link>
                     </li>
                     <li>
-                        <a>Sign-Up</a>
+                        <Link href="/register">Sign-Up</Link>
                     </li>
                 </div>
             </ul>
