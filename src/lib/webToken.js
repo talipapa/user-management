@@ -38,7 +38,6 @@ const validateToken = async () => {
         console.log(result.payload)
         return true
     } catch (err) {
-        cookieStore.delete('token')
         return false
     }
 }

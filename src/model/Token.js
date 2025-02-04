@@ -2,6 +2,7 @@
 import {Schema, model, models} from "mongoose";
 import dbConnect from "@/lib/mongoDB";
 
+
 class Token {
     constructor(){
         this.schema = new Schema({

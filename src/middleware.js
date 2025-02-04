@@ -2,12 +2,13 @@
 
 import { NextResponse } from "next/server";
 import { validateToken } from "./lib/webToken";
+import { cookies } from "next/headers";
 
 const protectedRoutes = ["/profile"];
 const publicRoutes = ["/register", "/login"];
 
 export default async function middleware(req) {
-    let tokenResponse = await validateToken(req.cookies.token);
+    let tokenResponse = await validateToken();
 
     if (tokenResponse !== undefined){
         // Will redirect unauthenticated users to the register page if they try to access a protected route

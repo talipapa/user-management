@@ -10,7 +10,6 @@ const getUser = async () => {
         const result = await jose.jwtVerify(token.value, new TextEncoder().encode(process.env.TOKEN_SECRET))
         return result.payload
     } catch (error) {
-        cookieStore.delete('token')
         return null
     }
 }
