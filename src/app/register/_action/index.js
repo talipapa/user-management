@@ -4,7 +4,7 @@ import User from "@/model/User"
 import md5 from "md5"
 import { cookies } from "next/headers"
 
-const registerUser = async(first_name, last_name, email, password, confirm_password) => {
+async function registerUser(first_name, last_name, email, password, confirm_password) {
     const initializeUser = new User()
     let hasError = false
     let clientResult = []
@@ -32,6 +32,16 @@ const registerUser = async(first_name, last_name, email, password, confirm_passw
             message: "Email is required"
         })
     }
+
+    const emailResult = await initializeUser.findByEmail(email)
+    if (emailResult !== null){
+        hasError = true
+        clientResult.push({
+            errName: "email",
+            message: "Email already exists"
+        })
+    }
+
     if (!password){
         hasError = true
         clientResult.push({

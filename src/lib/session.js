@@ -1,9 +1,10 @@
 'use server'
 
+import Token from '@/model/Token';
 import * as jose from 'jose';
 import { cookies } from 'next/headers';
 
-const getUser = async () => {
+async function getUser() {
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
     try {
@@ -14,4 +15,12 @@ const getUser = async () => {
     }
 }
 
-export {getUser}
+async function logout() {
+    const initializeToken = new Token()
+    const cookieStore = await cookies()
+    const tempCookie = cookieStore.get('token').value
+    cookieStore.delete('token')
+    initializeToken.delete(await jose.decodeJwt(tempCookie).id)
+}
+
+export {getUser, logout}

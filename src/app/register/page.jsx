@@ -8,7 +8,6 @@ import { createToken } from '@/lib/webToken'
 import { useRouter } from 'next/navigation'
 const page = () => {
     const router = useRouter()
-
     const [error, setError] = React.useState()
     
     const register = (e) => {

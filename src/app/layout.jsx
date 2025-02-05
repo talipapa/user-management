@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased  `}
       >
         <div  className="w-full h-full flex items-center justify-center">
-          <div className="w-[1600px] min-h-[900px] h-full flex flex-col justify-between space-y-8">
+          <div className="w-[1600px] h-full flex flex-col  space-y-8">
             <NavigationBar/>
             <div className="w-full flex justify-center mb-10">
               {children}

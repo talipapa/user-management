@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TextInput = ({error, placeholder, inputName, inputType, defaultVal, onChange}) => {
+const ControlledTextInput = ({error, placeholder, inputName, inputType, value, onChange}) => {
     
   return (
     <div className='w-full relative'>
@@ -17,14 +17,10 @@ const TextInput = ({error, placeholder, inputName, inputType, defaultVal, onChan
         }
         
         <label className="input w-full input-bordered flex items-center gap-2 rounded-xl text-slate-500">
-            {onChange ? (
-                <input name={inputName} type={inputType} className="grow text-black" placeholder={placeholder} onChange={onChange} defaultValue={defaultVal ? defaultVal : null} />
-            ) : (
-                <input name={inputName} type={inputType} className="grow text-black" placeholder={placeholder} defaultValue={defaultVal ? defaultVal : null} />
-            )}
+            <input name={inputName} type={inputType} className="grow text-black" placeholder={placeholder} onChange={onChange} value={value} />
         </label>
     </div>
   )
 }
 
-export default TextInput
+export default ControlledTextInput

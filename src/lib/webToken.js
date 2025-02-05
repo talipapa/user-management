@@ -5,12 +5,13 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
 
-const createToken = async (user) => {
+async function createToken(user) {
     const initializeWebToken = new Token();
     const cookieStore = await cookies();
 
     const token = await new jose.SignJWT({
         id: user._id,
+        role: user.user_role,
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
@@ -26,7 +27,7 @@ const createToken = async (user) => {
     return token;    
 }
 
-const validateToken = async () => {
+async function validateToken() {
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
     
@@ -34,8 +35,7 @@ const validateToken = async () => {
         return false
     }
     try {
-        const result = await jose.jwtVerify(token.value, new TextEncoder().encode(process.env.TOKEN_SECRET))
-        console.log(result.payload)
+        await jose.jwtVerify(token.value, new TextEncoder().encode(process.env.TOKEN_SECRET))
         return true
     } catch (err) {
         return false

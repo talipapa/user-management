@@ -1,9 +1,12 @@
 'use server'
 import Link from 'next/link'
-import { getUser } from '@/lib/session'
+import { getUser, logout } from '@/lib/session'
+import { redirect } from 'next/navigation'
+
 
 const NavigationBar = async () => {
     const user = await getUser()
+
 
     if (user) {
         return (
@@ -15,13 +18,16 @@ const NavigationBar = async () => {
                     <ul className="menu menu-horizontal px-2">
                         <div className='menu menu-horizontal'>
                             <li><a href="/">User list</a></li>
+                            
                         </div>
                         <div className='menu menu-horizontal'>
                             <li>
-                                <Link href="/profile">Profile</Link>
+                                <Link href="/profile">Welcome! {user.first_name}</Link>
                             </li>
                             <li>
-                                <Link href="/logout">Logout</Link>
+                                <form action={logout}>
+                                    <button type="submit">Logout</button>
+                                </form>
                             </li>
                         </div>
                     </ul>

@@ -1,28 +1,15 @@
-'use client'
-import Image from "next/image";
-import Table from "../components/Table";
-import { useEffect, useState } from "react";
+'use server'
+
 import { fetchUsers } from "./_action";
+import { getUser } from "@/lib/session";
+import ClientWrapper from "./_components/Admin/ClientWrapper";
 
-export default function Home() {
-  const [users, setUsers] = useState([])
+export default async function page() {
+  const users = await fetchUsers();
+  const currentUser = await getUser();
 
 
-  useEffect(() => {
-    fetchUsers()
-      .then((res) => {
-        if (res.length <= 0){
-          console.warn("No users found")
-        }
-        setUsers(res)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }, [])
   return (
-    <div className="w-full lg:w-[70%] bg-slate-50 lg:shadow-xl lg:rounded-3xl px-8 py-6">
-      <Table users={users}/>
-    </div>
+    <ClientWrapper users={users} currentUser={currentUser}/>
   );
 }
